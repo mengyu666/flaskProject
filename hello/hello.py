@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect
 
 app = Flask(__name__)
 
@@ -9,9 +9,13 @@ def index():
 
 
 @app.route('/hi')
-@app.route('/hello')
 def say_hello():
     return '<h1>hj, Flask!</h1>'
+
+
+@app.route('/hello')
+def hello():
+    return redirect('http://www.example.com')
 
 
 if __name__ == '__main__':
