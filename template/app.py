@@ -10,6 +10,10 @@ from flask import Flask, render_template, flash, redirect, url_for, Markup
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'secret string')
+
+'''
+前者用来删除Jinja2语句 后的第一个空行，后者则用来删除Jinja2语句所在行之前的空格和制表 符（tabs）
+'''
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
@@ -74,10 +78,11 @@ def watchlist_with_static():
     return render_template('watchlist_with_static.html', user=user, movies=movies)
 
 
-# message flashing
+# message flashing 消息闪现
 @app.route('/flash')
 def just_flash():
-    flash('I am flash, who is looking for me?')
+    # flash('I am flash, who is looking for me?')
+    flash(u'你好，我是闪电。')
     return redirect(url_for('index'))
 
 

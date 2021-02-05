@@ -2,29 +2,32 @@
 <html>
 <head>
     {% block head %}
-        <meta charset="utf-8">
-        {# l浏览器标签页显示的标题 #}
-        <title>{% block title %}Template - HelloFlask{% endblock %}</title>
-        {# 浏览器标签页现实的网站头像 #}
+        {% block metas %}
+            <meta charset="utf-8">
+        {% endblock metas %}
+
+        <title>{% block title %}Form - HelloFlask{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        {# 调用存储CSS规则的styles.css文件 #}
         {% block styles %}
             <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css' ) }}">
-        {% endblock %}
-    {% endblock %}
+        {% endblock styles %}
+    {% endblock head %}
 </head>
 <body>
-{# 页眉黑色的条条 #}
 <nav>
-    <ul><li><a href="{{ url_for('index') }}">Home</a></li></ul>
+    {% block nav %}
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+        </ul>
+    {% endblock %}
 </nav>
-<main>
-    {# 渲染flash消息 #}
-    {% for message in get_flashed_messages() %}
-        <div class="alert">{{ message }}</div>
-    {% endfor %}
 
-    {# 下面的块是为了方便字模版的继承 #}
+<main>
+    {% for message in get_flashed_messages() %}
+        <div class="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
     {% block content %}{% endblock %}
 </main>
 <footer>
